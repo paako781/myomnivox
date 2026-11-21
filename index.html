@@ -380,11 +380,13 @@ s.p.forEach(function(x){doc.text("Paiement reçu le "+x[0]+" · "+x[1],14,y);doc
 y+=1;doc.line(14,y,196,y);y+=8;
 doc.setFont("helvetica","bold");doc.text("Solde à payer",14,y);doc.text(fmt.format(bal(s)),196,y,{align:"right"});
 var blob=doc.output("blob");
+var fname="recu-"+s.k.replace(/\s+/g,"-").toLowerCase()+".pdf";
+function saveLocal(){var url=URL.createObjectURL(blob);var a=document.createElement("a");a.href=url;a.download=fname;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},4000)}
 getDownloads().then(function(dl){
-if(!dl){msg="Le téléchargement n’est pas possible dans cette vue.";rd();return}
-return dl.save({filename:"recu-"+s.k.replace(/\s+/g,"-").toLowerCase()+".pdf",data:blob}).then(function(){},function(err){
+if(!dl){saveLocal();return}
+return dl.save({filename:fname,data:blob}).then(function(){},function(err){
 if(err&&err.code==="declined")return;
-msg="Le reçu n’a pas pu être enregistré.";rd()
+saveLocal()
 })
 })
 }
