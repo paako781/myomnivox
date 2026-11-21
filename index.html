@@ -365,8 +365,8 @@ var LOGO_PNG="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51
 function recu(s){
 if(!window.jspdf){msg="Le générateur de reçu n’a pas pu se charger. Réessayez dans un instant.";rd();return}
 var doc=new window.jspdf.jsPDF();
-doc.addImage(LOGO_PNG,"PNG",14,10,13,13);
-doc.setFont("helvetica","bold");doc.setFontSize(13);doc.text("CÉGEP DU",31,15);doc.text("VIEUX MONTRÉAL",31,20.5);
+doc.addImage(STAR_LOGO,"PNG",14,8,16,16);
+doc.setFont("helvetica","bold");doc.setFontSize(13);doc.text("CÉGEP DU",34,15);doc.text("VIEUX MONTRÉAL",34,20.5);
 doc.setFontSize(10);doc.setFont("helvetica","normal");
 doc.text("Nom : "+U.nom,14,32);doc.text("Matricule : "+U.id,14,39);doc.text("Programme : "+U.prog,14,46);
 doc.text("Session : "+s.k,14,53);doc.text("Date d’émission : "+new Date().toLocaleDateString("fr-CA"),14,60);
